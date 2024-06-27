@@ -8,9 +8,9 @@
 import torch
 import torch.nn as nn
 
-class VGG(nn.Moudle):
-    def __init__(self, features, num_classes = 1000, init_weights=True):
-        super(VCG, self).__init__()
+class VGG(nn.Module):
+    def __init__(self, features, num_classes = 2, init_weights=True):
+        super(VGG, self).__init__()
         self.features = features
 
         # 自适应平均池化
@@ -198,3 +198,10 @@ def vgg19_bn(pretrained=False, progress=True, **kwargs):
         progress (bool): If True, displays a progress bar of the download to stderr
     """
     return _vgg('vgg19_bn', 'E', True, pretrained, progress, **kwargs)
+
+
+
+if __name__ == '__main__':
+    images = torch.rand(4, 3, 224, 224)
+    model = vgg19_bn()
+    print(model(images).size())
